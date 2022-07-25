@@ -21,7 +21,7 @@ provider "google" {
 
 terraform {
   backend "gcs" {
-    bucket = "nodal-spot-341618"
+    bucket = "lustrous-center-357418"
     prefix = "terraform"
   }
 }
