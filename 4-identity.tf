@@ -34,6 +34,10 @@ data "google_service_account" "cloudbuild" {
     account_id = "${local.project_number}@cloudbuild.gserviceaccount.com"
 }
 
+output "project_number" {
+    value = local.project_number
+}
+
 # Enable Cloudbuild to deploy Cloud Functions
 resource "google_project_iam_member" "cb_cloudfunctions_developer" {
   project = local.project
