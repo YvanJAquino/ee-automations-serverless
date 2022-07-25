@@ -53,3 +53,10 @@ resource "google_project_service" "run" {
     service  = "run.googleapis.com"
     disable_on_destroy = false
 }
+
+# Enable the Secret Manager API
+resource "google_project_service" "secretmanager" {
+    provider = google
+    service  = "secretmanager.googleapis.com"
+    disable_on_destroy = false
+}

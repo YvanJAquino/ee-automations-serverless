@@ -14,7 +14,7 @@ locals {
     project = coalesce(var.project_id, data.google_client_config.default.project)
     project_number = data.google_project.default.number
     region  = coalesce(var.region, data.google_client_config.default.region)
-    cloudbuild_service_account = "${local.project_number}@cloudbuild.gserviceaccount.com"
+    cb_sa_member = "serviceAccount:${local.project_number}@cloudbuild.gserviceaccount.com"
 }
 
 # Recreate the provider based on defaults or user-provided variables.
