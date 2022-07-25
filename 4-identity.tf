@@ -31,39 +31,30 @@ resource "google_project_iam_member" "earthengine_admin" {
 
 # Update Project level IAM for the cloud BUild service account
 
-resource "google_service_account" "cloudbuild" {
-  account_id   = "${local.project_number}@cloudbuild.gserviceaccount.com"
-}
-
-
-output "project_number" {
-    value = local.project_number
-}
-
 # Enable Cloudbuild to deploy Cloud Functions
 resource "google_project_iam_member" "cb_cloudfunctions_developer" {
   project = local.project
   role    = "roles/cloudfunctions.developer"
-  member  = "serviceAccount:${google_service_account.cloudbuild.account_id}"
+  member  = local.cloudbuild_service_account
 }
 
 # Enable Cloudbuild to deploy to Cloud Run
 resource "google_project_iam_member" "cb_run_admin" {
   project = local.project
   role    = "roles/run.admin"
-  member  = "serviceAccount:${google_service_account.cloudbuild.account_id}"
+  member  = local.cloudbuild_service_account
 }
 
 # Enable Cloudbuild to use other Service Accounts
 resource "google_project_iam_member" "cb_iam_sa_user" {
   project = local.project
   role    = "roles/iam.serviceAccountUser"
-  member  = "serviceAccount:${google_service_account.cloudbuild.account_id}"
+  member  = local.cloudbuild_service_account
 }
 
 # Enable Cloudbuild to read Secret versions
 resource "google_project_iam_member" "cb_secrets_accessor" {
   project = local.project
   role    = "roles/secretmanager.secretAccessor"
-  member  = "serviceAccount:${google_service_account.cloudbuild.account_id}"
+  member  = local.cloudbuild_service_account
 }
