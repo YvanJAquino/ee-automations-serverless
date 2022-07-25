@@ -94,11 +94,11 @@ resource "google_service_account_iam_member" "app_sa_on_default_token_creator" {
 resource "google_service_account_iam_member" "default_on_app_sa_user" {
   service_account_id = google_service_account.service.name
   role               = "roles/iam.serviceAccountUser"
-  member             = "serviceAccount:${data.google_compute_default_service_account.default.name}"
+  member             = "serviceAccount:${data.google_compute_default_service_account.default.email}"
 }
 
 resource "google_service_account_iam_member" "default_on_app_sa_token_creator" {
   service_account_id = google_service_account.service.name
   role               = "roles/iam.serviceAccountTokenCreator"
-  member             = "serviceAccount:${data.google_compute_default_service_account.default.name}"
+  member             = "serviceAccount:${data.google_compute_default_service_account.default.email}"
 }
